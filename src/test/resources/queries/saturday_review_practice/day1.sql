@@ -261,11 +261,31 @@ GROUP BY DEPARTMENT_NAME;
 -- From the employees, departments, and locations tables,
 -- find full name (first and last name), and salary of those employees
 -- who work in any department located in Oxford .
+SELECT FIRST_NAME,LAST_NAME AS FULL_NAME,SALARY
+FROM EMPLOYEES
+where DEPARTMENT_ID=(select DEPARTMENT_ID from DEPARTMENTS D join LOCATIONS L on D.LOCATION_ID=l.LOCATION_ID
+                                        where CITY like 'Oxford');
 
+-- to check HOW MANY EMPLOYEES HAVE DEPARTMENT ID= 80, WHICH IS CORRESPONDING FOR CITY OXFORD
+select LOCATION_ID from LOCATIONS where CITY like 'Oxford';
+select * from EMPLOYEES
+where DEPARTMENT_ID=80;
 
 --TASK 5
 -- From the employees, departments, and locations tables,
 -- find avg salary for each city
+select CITY, ROUND(avg(SALARY)) AS AVEGARE_SALARY
+from EMPLOYEES E JOIN DEPARTMENTS D on E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN LOCATIONS ON D.LOCATION_ID = LOCATIONS.LOCATION_ID
+GROUP BY CITY;
+
+-- TO CHECK HOW MANY EMPLOYEES FOR EACH CITY
+SELECT  CITY, COUNT(EMPLOYEE_ID) FROM EMPLOYEES E JOIN DEPARTMENTS D on E.DEPARTMENT_ID = D.DEPARTMENT_ID
+ JOIN LOCATIONS L on D.LOCATION_ID = L.LOCATION_ID
+GROUP BY CITY;
+
+
+
 
 
 ----- SELF JOIN ---
