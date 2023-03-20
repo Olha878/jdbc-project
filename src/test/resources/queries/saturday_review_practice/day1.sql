@@ -290,9 +290,14 @@ GROUP BY CITY;
 
 ----- SELF JOIN ---
 -- Display  all employees and their  managers information
-
+SELECT W.FIRST_NAME, W.LAST_NAME, M.FIRST_NAME, M.LAST_NAME FROM
+  EMPLOYEES W JOIN EMPLOYEES M  ON W.MANAGER_ID=M.EMPLOYEE_ID;
 
 -- Given the Employee table, write a SQL query that finds out employees who earn more than their managers.
+SELECT W.FIRST_NAME, W.LAST_NAME,W.SALARY, M.FIRST_NAME,M.LAST_NAME, M.SALARY
+    FROM EMPLOYEES W JOIN EMPLOYEES M
+ON W.EMPLOYEE_ID=M.EMPLOYEE_ID
+WHERE W.SALARY>M.SALARY;
 
 
 -------  SET OPERATORS ---
